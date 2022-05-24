@@ -8,13 +8,19 @@ public class ModuleNameInput : Module
     public int VerticalIndex;
     public int HorizontalIndex;
 
-    private void Start()
+    private void OnEnable()
+    {
+        Initialize();
+    }
+
+    private void Initialize()
     {
         VerticalIndex = 0;
         HorizontalIndex = 0;
 
         RefreshButtonsState();
     }
+
     private void Update()
     {
         // Vertical movement
@@ -40,8 +46,12 @@ public class ModuleNameInput : Module
         // Button Pressed
         if (Input.GetKeyDown(KeyCode.L))
         {
-            if (HorizontalIndex != -1 && VerticalIndex != -1)
-                VerticalButtonFiles[VerticalIndex].HorizontalButtonInputs[HorizontalIndex].ButtonPressed();
+            VerticalButtonFiles[VerticalIndex].HorizontalButtonInputs[HorizontalIndex].ButtonPressed();
+        }
+        // Button Pressed
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameEvents.ShowMainMenu();
         }
     }
 

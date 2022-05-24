@@ -23,4 +23,43 @@ public static class GameEvents
 	{
         OnButtonInputPressed?.Invoke(s);
     }
+
+	#region MainMenu events
+
+	public static Action OnLoadGameplay;
+	public static void LoadGameplay()
+	{
+		OnLoadGameplay?.Invoke();
+	}
+
+	public static Action OnShowIntro;
+	public static void ShowIntro()
+	{
+		OnShowIntro?.Invoke();
+	}
+
+	public static Action OnShowMainMenu;
+	public static void ShowMainMenu()
+	{
+		OnShowMainMenu?.Invoke();
+	}
+
+	public static Action OnShowNameInput;
+	public static void ShowNameInput()
+	{
+		OnShowNameInput?.Invoke();
+	}
+
+	public static Action OnShowOptions;
+	public static void ShowOptions()
+	{
+		OnShowOptions?.Invoke();
+	}
+    #endregion
+
+    #region Gameplay events
+
+	// TODO: all
+
+    #endregion
 }

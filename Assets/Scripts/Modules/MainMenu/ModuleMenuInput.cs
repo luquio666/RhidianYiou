@@ -8,7 +8,41 @@ public class ModuleMenuInput : Module
     public ModuleButtonInput[] ButtonInputs;
     public int VerticalIndex;
 
-    private void Start()
+    private void OnEnable()
+    {
+        Initialize();
+        GameEvents.OnButtonInputPressed += ButtonInputPressed;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnButtonInputPressed -= ButtonInputPressed;
+    }
+
+    private void ButtonInputPressed(string s)
+    {
+        switch (s)
+        {
+            case "Continue":
+                string name = PlayerPrefs.GetString("PLAYER_NAME", string.Empty);
+                if (string.IsNullOrEmpty(name))
+                    Debug.LogError("NO SAVED NAME FOUND");
+                else
+                    GameEvents.LoadGameplay();
+
+                break;
+            case "New game":
+                GameEvents.ShowNameInput();
+                break;
+            case "Options":
+                GameEvents.ShowOptions();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void Initialize()
     {
         VerticalIndex = -1;
         foreach (var item in ButtonInputs)

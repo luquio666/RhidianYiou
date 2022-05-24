@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ModuleNameInputDisplay : MonoBehaviour
+public class ModuleNameInputDisplay : Module
 {
 
     public Text NameDisplay;
+    public string DefaultName = "John";
 
     private string _name = string.Empty;
 
@@ -16,6 +17,7 @@ public class ModuleNameInputDisplay : MonoBehaviour
 
     private void OnEnable()
     {
+        Initialize();
         GameEvents.OnButtonInputPressed += ButtonInputPressed;
     }
 
@@ -24,8 +26,9 @@ public class ModuleNameInputDisplay : MonoBehaviour
         GameEvents.OnButtonInputPressed -= ButtonInputPressed;
     }
 
-    private void Start()
+    private void Initialize()
     {
+        _name = DefaultName;
         FillNameWithEmpty();
     }
 
@@ -44,6 +47,7 @@ public class ModuleNameInputDisplay : MonoBehaviour
         else if (s == "save")
         {
             GameEvents.SaveName(_name);
+            GameEvents.LoadGameplay();
         }
         else if (_name.Length < MAX_CHARACTERS && s.Length == 1)
         {
