@@ -7,7 +7,7 @@ public class ModuleNameInputDisplay : Module
 {
 
     public Text NameDisplay;
-    public string DefaultName = "John";
+    public string DefaultName = "JOHN";
 
     private string _name = string.Empty;
 

@@ -7779,7 +7779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NameDisplay: {fileID: 1436244242}
-  DefaultName: John
+  DefaultName: JOHN
 --- !u!1 &1450172290
 GameObject:
   m_ObjectHideFlags: 0
