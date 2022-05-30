@@ -24,6 +24,24 @@ public static class GameEvents
         OnButtonInputPressed?.Invoke(s);
     }
 
+	public static Action<string> OnShowDialog;
+	public static void ShowDialog(string id)
+	{
+		OnShowDialog?.Invoke(id);
+	}
+
+	public static Action<string> OnGiveItem;
+	public static void GiveItem(string id)
+	{
+		OnGiveItem?.Invoke(id);
+	}
+
+	public static Action OnHideDialog;
+	public static void HideDialog()
+	{
+		OnHideDialog?.Invoke();
+	}
+
 	#region MainMenu events
 
 	public static Action OnLoadGameplay;

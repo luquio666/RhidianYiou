@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ModuleInitialize : Module
 {
+    public float TimeToNextScene = 5f;
     private void OnEnable()
     {
-        Invoke(nameof(LoadMainMenu), 10f);
+        Invoke(nameof(LoadMainMenu), TimeToNextScene);
     }
 
     private void LoadMainMenu()

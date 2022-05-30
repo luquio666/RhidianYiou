@@ -24,11 +24,10 @@ public class ModuleMenuInput : Module
         switch (s)
         {
             case "Continue":
-                string name = PlayerPrefs.GetString("PLAYER_NAME", string.Empty);
-                if (string.IsNullOrEmpty(name))
-                    Debug.LogError("NO SAVED NAME FOUND");
-                else
+                if (SavedDataAvailable())
                     GameEvents.LoadGameplay();
+                else
+                    Debug.LogError("NO SAVED NAME FOUND");
 
                 break;
             case "New game":
@@ -42,14 +41,30 @@ public class ModuleMenuInput : Module
         }
     }
 
+    private bool SavedDataAvailable()
+    {
+        return !string.IsNullOrEmpty(PlayerPrefs.GetString("PLAYER_NAME", string.Empty));
+    }
+
     private void Initialize()
     {
-        VerticalIndex = -1;
-        foreach (var item in ButtonInputs)
+        // when saved data available, position selection on continue[0]. Otherwise on new game [1]
+        VerticalIndex = SavedDataAvailable() ? 0 : 1;
+
+        RefreshButtonsState();
+    }
+
+    private void RefreshButtonsState()
+    {
+        for (int i = 0; i < ButtonInputs.Length; i++)
         {
-            item.SetUnselectedState();
+            if (i == VerticalIndex)
+                ButtonInputs[i].SetSelectedState();
+            else
+                ButtonInputs[i].SetUnselectedState();
         }
     }
+
     private void Update()
     {
         // Vertical movement
