@@ -29,6 +29,10 @@ public class ModuleAutoBuildingExteriorEditor : Editor
         {
             myScript.Clear();
         }
+        if (GUILayout.Button("CreateColliders"))
+        {
+            myScript.CreateColliders();
+        }
     }
 }
 
@@ -43,6 +47,8 @@ public class ModuleAutoBuildingExterior : Module
     public Sprite[] Windows;
     public Sprite[] Doors;
 
+    private BoxCollider _col;
+    private Rigidbody _rb;
     private const string BuildingLayer = "Foreground";
 
     public void Clear(string target = null)
@@ -72,6 +78,20 @@ public class ModuleAutoBuildingExterior : Module
         CreateRoof();
         CreateWindows();
         CreateDoor();
+
+        CreateColliders();
+    }
+
+    public void CreateColliders()
+    {
+        _rb = _rb == null ? _rb = this.gameObject.AddComponent<Rigidbody>() : _rb;
+        _col = _col == null ? _col = this.gameObject.AddComponent<BoxCollider>() : _col;
+
+        _rb.useGravity = false;
+        _rb.isKinematic = true;
+
+        _col.size = new Vector3(Width, Depth, 1);
+        _col.center = new Vector3(((float)Width - 1) / 2f, ((float)Depth - 1) / 2f, 0);
     }
 
     private void CreateFront()
@@ -91,6 +111,7 @@ public class ModuleAutoBuildingExterior : Module
         Clear("Windows");
         CreateWindows();
     }
+    
     private void CreateWindows()
     {
         var parent = CreateParent("Windows");
@@ -115,6 +136,7 @@ public class ModuleAutoBuildingExterior : Module
         Clear("Door");
         CreateDoor();
     }
+    
     private void CreateDoor()
     {
         var parent = CreateParent("Door");
