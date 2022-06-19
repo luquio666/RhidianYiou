@@ -92,6 +92,7 @@ public class ModuleMovement : Module
         {
             _animIndex = 0;
             _targetMovement = dir;
+            _lastDirection = dir;
         }
         else 
         {
@@ -138,6 +139,20 @@ public class ModuleMovement : Module
     {
         bool result = Physics.Linecast(transform.position, transform.position + direction) == false;
         return result;
+    }
+
+    public ModuleInteractable GetInteractable()
+    {
+        if (Physics.Raycast(transform.position, _lastDirection, out RaycastHit hit))
+        {
+            var interactable = hit.transform.GetComponent<ModuleInteractable>();
+
+            if (interactable != null && hit.distance < 1f)
+            {
+                return interactable;
+            }
+        }
+        return null;
     }
 
     private Sprite[] GetSequenceByTarget(Vector3 target)

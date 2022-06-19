@@ -39,7 +39,7 @@ public class ModuleInteractableSoilEditor : Editor
     }
 }
 
-public class ModuleInteractableSoil : ModuleInteractable
+public class ModuleInteractableSoil : Module
 {
 
     public Sprouts SproutSelected;

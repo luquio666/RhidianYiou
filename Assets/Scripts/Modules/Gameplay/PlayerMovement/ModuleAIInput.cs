@@ -50,7 +50,6 @@ public class ModuleAIInput : Module
         }
     }
 
-
     private void BehaviourRandom()
     {
         var availableDirection = MoveMod.GellAllAvailableDirections();

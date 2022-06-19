@@ -115,7 +115,7 @@ public class ModuleDialogUI : Module
                 //DialogBox.text = string.Empty;
             }
         }
-        if (_dialogData.Options.Length > 0)
+        if (_dialogData.Options != null && _dialogData.Options.Length > 0)
         {
             SetOptions();
         }

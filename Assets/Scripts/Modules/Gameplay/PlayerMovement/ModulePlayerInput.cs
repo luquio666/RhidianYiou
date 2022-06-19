@@ -14,6 +14,14 @@ public class ModulePlayerInput : Module
 
     private void Update()
     {
+        if (UIController.Instance.IsUIActive())
+            return;
+        MoveInputs();
+        OtherInputs();
+    }
+
+    private void MoveInputs()
+    {
         if (Input.GetKey(KeyCode.W))
         {
             MoveMod.SetTargetMovement(Vector3.up);
@@ -31,4 +39,15 @@ public class ModulePlayerInput : Module
             MoveMod.SetTargetMovement(Vector3.right);
         }
     }
+
+    private void OtherInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            var interactale = MoveMod.GetInteractable();
+            if (interactale != null)
+                interactale.Interact();
+        }
+    }
+
 }

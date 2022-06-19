@@ -30,6 +30,12 @@ public static class GameEvents
 		OnShowDialog?.Invoke(id);
 	}
 
+	public static Action<ModuleDialogData> OnShowDialogData;
+	public static void ShowDialogData(ModuleDialogData dialogData)
+	{
+		OnShowDialogData?.Invoke(dialogData);
+	}
+
 	public static Action<string> OnGiveItem;
 	public static void GiveItem(string id)
 	{

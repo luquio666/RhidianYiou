@@ -14,11 +14,22 @@ public class UIController : Singleton<UIController>
         ResetDefaultState();
 
         GameEvents.OnShowDialog += ShowDialog;
+        GameEvents.OnShowDialogData += ShowDialogData;
     }
 
     private void OnDisable()
     {
         GameEvents.OnShowDialog -= ShowDialog;
+        GameEvents.OnShowDialogData -= ShowDialogData;
+    }
+
+
+    public bool IsUIActive()
+    {
+        if (DialogBox.gameObject.activeSelf)
+            return true;
+
+        return false;
     }
 
     private void ResetDefaultState()
@@ -29,6 +40,15 @@ public class UIController : Singleton<UIController>
     private void ShowDialog(string id)
     {
         var dialogData = GetDialogData(id);
+        if (dialogData != null)
+        {
+            DialogBox.gameObject.SetActive(true);
+            DialogBox.ShowText(dialogData);
+        }
+    }
+
+    private void ShowDialogData(ModuleDialogData dialogData)
+    {
         if (dialogData != null)
         {
             DialogBox.gameObject.SetActive(true);
