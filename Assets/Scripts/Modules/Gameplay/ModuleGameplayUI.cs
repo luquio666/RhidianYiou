@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,9 @@ using UnityEngine.UI;
 
 public class ModuleGameplayUI : Module
 {
+    public Text RealTime;
+    public Text PlayerPos;
+    [Space]
     public List<Text> SelectedDescription;
     public GameObject MoreOptionsHighlight;
     public GameObject InventoryHighlight;
@@ -16,11 +20,24 @@ public class ModuleGameplayUI : Module
     private void OnEnable()
     {
         GameEvents.OnPlayerActionSelected += PlayerActionSelected;
+        GameEvents.OnPlayerNewPosition += PlayerNewPosition;
     }
 
     private void OnDisable()
     {
         GameEvents.OnPlayerActionSelected -= PlayerActionSelected;
+        GameEvents.OnPlayerNewPosition -= PlayerNewPosition;
+    }
+
+    private void Update()
+    {
+        DateTime currentTime = System.DateTime.Now;
+        RealTime.text = $"{currentTime.Hour:00}:{currentTime.Minute:00}";
+    }
+
+    private void PlayerNewPosition(Vector2 pos)
+    {
+        PlayerPos.text = $"x:{pos.x}\ny:{pos.y}";
     }
 
     private void PlayerActionSelected(PlayerAction pa)

@@ -107,5 +107,11 @@ public static class GameEvents
 		OnPlayAudio?.Invoke(audioName);
 	}
 
+	public static Action<Vector2> OnPlayerNewPosition;
+	public static void PlayerNewPosition(Vector2 pos)
+	{
+		OnPlayerNewPosition?.Invoke(pos);
+	}
+
 	#endregion
 }

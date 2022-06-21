@@ -102,6 +102,12 @@ public class ModuleMovement : Module
         }
     }
 
+    private void Update()
+    {
+        if(this.name == "Player")
+            GameEvents.PlayerNewPosition(new Vector2((int)this.transform.position.x, (int)this.transform.position.y));
+    }
+
     private void FixedUpdate()
     {
         if (_animIndex >= 4)
