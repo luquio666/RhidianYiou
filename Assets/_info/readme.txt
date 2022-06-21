@@ -1,5 +1,6 @@
 Gameboy
 -screen size: 160x144
+-aspect ratio: 10:9
 
 
 Sprite Settings
