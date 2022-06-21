@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.U2D;
 
+#if UNITY_EDITOR
+using UnityEditor;
 [CustomEditor(typeof(ModuleAutoBuildingExterior))]
 public class ModuleAutoBuildingExteriorEditor : Editor
 {
@@ -35,6 +36,7 @@ public class ModuleAutoBuildingExteriorEditor : Editor
         }
     }
 }
+#endif
 
 public class ModuleAutoBuildingExterior : Module
 {

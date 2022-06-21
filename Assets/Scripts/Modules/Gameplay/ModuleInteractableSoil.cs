@@ -1,25 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-[System.Serializable]
-public class SoilStages
-{
-    public Sprite Soil;
-    public Sprite Sprout;
-}
 
-public enum Sprouts
-{
-    CARROT,
-    CORN,
-    LETTUCE,
-    PUMPKIN,
-    TOMATO,
-    WHEAT
-}
-
+#if UNITY_EDITOR
+using UnityEditor;
 [CustomEditor(typeof(ModuleInteractableSoil))]
 public class ModuleInteractableSoilEditor : Editor
 {
@@ -37,6 +22,24 @@ public class ModuleInteractableSoilEditor : Editor
             myScript.ResetStage();
         }
     }
+}
+#endif
+
+[System.Serializable]
+public class SoilStages
+{
+    public Sprite Soil;
+    public Sprite Sprout;
+}
+
+public enum Sprouts
+{
+    CARROT,
+    CORN,
+    LETTUCE,
+    PUMPKIN,
+    TOMATO,
+    WHEAT
 }
 
 public class ModuleInteractableSoil : Module

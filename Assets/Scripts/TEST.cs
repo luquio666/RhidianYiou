@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
 [CustomEditor(typeof(TEST))]
 public class TESTEditor : Editor
 {
@@ -21,6 +22,7 @@ public class TESTEditor : Editor
         }
     }
 }
+#endif
 
 public class TEST : MonoBehaviour
 {
