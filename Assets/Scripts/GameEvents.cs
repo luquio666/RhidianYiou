@@ -79,11 +79,33 @@ public static class GameEvents
 	{
 		OnShowOptions?.Invoke();
 	}
-    #endregion
+	#endregion
 
-    #region Gameplay events
+	#region Gameplay events
 
-	// TODO: all
+	public static Action<List<InventoryItem>> OnShowInventory;
+	public static void ShowInventory(List<InventoryItem> inventory)
+	{
+		OnShowInventory?.Invoke(inventory);
+	}
 
-    #endregion
+	public static Action OnShowMoreOptions;
+	public static void ShowMoreOptions()
+	{
+		OnShowMoreOptions?.Invoke();
+	}
+
+	public static Action<PlayerAction> OnPlayerActionSelected;
+	public static void PlayerActionSelected(PlayerAction pa)
+	{
+		OnPlayerActionSelected?.Invoke(pa);
+	}
+
+	public static Action<AudioNames> OnPlayAudio;
+	public static void PlayAudio(AudioNames audioName)
+	{
+		OnPlayAudio?.Invoke(audioName);
+	}
+
+	#endregion
 }

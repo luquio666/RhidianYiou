@@ -25,12 +25,16 @@ public class ModuleMenuInput : Module
         {
             case "Continue":
                 if (SavedDataAvailable())
+                {
+                    GameEvents.PlayAudio(AudioNames.CLICK_01);
                     GameEvents.LoadGameplay();
+                }
                 else
                     Debug.LogError("NO SAVED NAME FOUND");
 
                 break;
             case "New game":
+                GameEvents.PlayAudio(AudioNames.CLICK_01);
                 GameEvents.ShowNameInput();
                 break;
             case "Options":
@@ -70,16 +74,19 @@ public class ModuleMenuInput : Module
         // Vertical movement
         if (Input.GetKeyDown(KeyCode.W))
         {
+            GameEvents.PlayAudio(AudioNames.CLICK_01);
             MoveVertical(-1);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
+            GameEvents.PlayAudio(AudioNames.CLICK_01);
             MoveVertical(1);
         }
 
         // Button Pressed
         if (Input.GetKeyDown(KeyCode.L))
         {
+            GameEvents.PlayAudio(AudioNames.CLICK_01);
             if (VerticalIndex != -1)
                 ButtonInputs[VerticalIndex].ButtonPressed();
         }

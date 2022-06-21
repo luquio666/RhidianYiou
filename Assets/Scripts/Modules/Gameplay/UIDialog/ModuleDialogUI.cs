@@ -135,7 +135,7 @@ public class ModuleDialogUI : Module
         var options = _dialogData.Options;
         for (int i = 0; i < _dialogData.Options.Length; i++)
         {
-            if (i >= DialogOptions.Length - 1)
+            if (i >= DialogOptions.Length)
             {
                 Debug.LogError("ModuleDialogUI :: more options than available to display.");
             }
@@ -166,6 +166,7 @@ public class ModuleDialogUI : Module
         // Button Pressed
         if (Input.GetKeyDown(KeyCode.L))
         {
+            GameEvents.PlayAudio(AudioNames.CLICK_01);
             ButtonPressed();
         }
     }
@@ -232,8 +233,5 @@ public class ModuleDialogUI : Module
             default:
                 break;
         }
-
-        // hide options
-        //ClearAndStopDialogOptions();
     }
 }

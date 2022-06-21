@@ -143,7 +143,8 @@ public class ModuleMovement : Module
 
     public ModuleInteractable GetInteractable()
     {
-        if (Physics.Raycast(transform.position, _lastDirection, out RaycastHit hit))
+        var hits = Physics.RaycastAll(transform.position, _lastDirection, 1f);
+        foreach (var hit in hits)
         {
             var interactable = hit.transform.GetComponent<ModuleInteractable>();
 

@@ -31,6 +31,7 @@ public class ModuleIntro : Module
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            GameEvents.PlayAudio(AudioNames.CLICK_01);
             if (Anim.GetCurrentAnimatorStateInfo(0).IsName(IntroAnimName))
             {
                 Anim.Play(LoopAnimName, 0, 0f);
@@ -59,6 +60,7 @@ public class ModuleIntro : Module
 
     private void ReplayIntro()
     {
+        GameEvents.PlayAudio(AudioNames.MUSIC_01);
         Anim.Play(IntroAnimName, 0, 0f);
         _replayIntroCo = StartCoroutine(ReplayIntroCo());
     }

@@ -6,7 +6,8 @@ public class UIController : Singleton<UIController>
 {
 
     public ModuleDialogUI DialogBox;
-
+    public ModuleInventoryUI InventoryUI;
+    [Space]
     public List<ModuleDialogData> DialogData;
 
     private void OnEnable()
@@ -15,18 +16,26 @@ public class UIController : Singleton<UIController>
 
         GameEvents.OnShowDialog += ShowDialog;
         GameEvents.OnShowDialogData += ShowDialogData;
+        GameEvents.OnShowInventory += ShowInventory;
     }
 
     private void OnDisable()
     {
         GameEvents.OnShowDialog -= ShowDialog;
         GameEvents.OnShowDialogData -= ShowDialogData;
+        GameEvents.OnShowInventory -= ShowInventory;
     }
 
+    public bool DialogBoxIsActive()
+    {
+        return DialogBox.gameObject.activeSelf;
+    }
 
     public bool IsUIActive()
     {
         if (DialogBox.gameObject.activeSelf)
+            return true;
+        if (InventoryUI.gameObject.activeSelf)
             return true;
 
         return false;
@@ -35,6 +44,7 @@ public class UIController : Singleton<UIController>
     private void ResetDefaultState()
     {
         DialogBox.gameObject.SetActive(false);
+        InventoryUI.gameObject.SetActive(false);
     }
 
     private void ShowDialog(string id)
@@ -53,7 +63,14 @@ public class UIController : Singleton<UIController>
         {
             DialogBox.gameObject.SetActive(true);
             DialogBox.ShowText(dialogData);
+            Debug.Log(dialogData.DialogText);
         }
+    }
+
+    private void ShowInventory(List<InventoryItem> inventory)
+    {
+        InventoryUI.gameObject.SetActive(true);
+        InventoryUI.ShowInventory(inventory);
     }
 
     private ModuleDialogData GetDialogData(string id)

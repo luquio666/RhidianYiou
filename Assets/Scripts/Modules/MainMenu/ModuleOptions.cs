@@ -8,6 +8,7 @@ public class ModuleOptions : Module
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
+            GameEvents.PlayAudio(AudioNames.CLICK_01);
             GameEvents.ShowMainMenu();
         }
     }

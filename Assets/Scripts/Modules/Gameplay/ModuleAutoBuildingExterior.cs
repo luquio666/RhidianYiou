@@ -38,6 +38,8 @@ public class ModuleAutoBuildingExteriorEditor : Editor
 
 public class ModuleAutoBuildingExterior : Module
 {
+    public string BuildingName;
+    [Space]
     public int Height = 3;
     public int Width = 3;
     public int Depth = 3;
@@ -47,8 +49,8 @@ public class ModuleAutoBuildingExterior : Module
     public Sprite[] Windows;
     public Sprite[] Doors;
 
-    private BoxCollider _col;
-    private Rigidbody _rb;
+    private BoxCollider _baseCol;
+
     private const string BuildingLayer = "Foreground";
 
     public void Clear(string target = null)
@@ -84,14 +86,38 @@ public class ModuleAutoBuildingExterior : Module
 
     public void CreateColliders()
     {
-        _rb = _rb == null ? _rb = this.gameObject.AddComponent<Rigidbody>() : _rb;
-        _col = _col == null ? _col = this.gameObject.AddComponent<BoxCollider>() : _col;
+        // Create collider for the base area of the building, taking width and depth
+        if (_baseCol == null)
+            _baseCol = this.gameObject.GetComponent<BoxCollider>();
+        if (_baseCol == null)
+            _baseCol = this.gameObject.AddComponent<BoxCollider>();
 
-        _rb.useGravity = false;
-        _rb.isKinematic = true;
+        _baseCol.size = new Vector3(Width, Depth, 1);
+        _baseCol.center = new Vector3(((float)Width - 1) / 2f, ((float)Depth - 1) / 2f, 0);
 
-        _col.size = new Vector3(Width, Depth, 1);
-        _col.center = new Vector3(((float)Width - 1) / 2f, ((float)Depth - 1) / 2f, 0);
+        // Create door collider
+        var parent = GetParent("Door");
+        var doorsAmount = parent.childCount;
+
+        for (int i = 0; i < doorsAmount; i++)
+        {
+            var door = parent.GetChild(i);
+
+            // Create door collider
+            BoxCollider doorCol = door.gameObject.GetComponent<BoxCollider>();
+            if(doorCol == null)
+                doorCol = door.gameObject.AddComponent<BoxCollider>();
+            doorCol.size = Vector3.one;
+            doorCol.center = Vector3.zero;
+
+            // Create door interactable
+            ModuleInteractable doorInteract = door.gameObject.GetComponent<ModuleInteractable>();
+            if (doorInteract == null)
+                doorInteract = door.gameObject.AddComponent<ModuleInteractable>();
+            doorInteract.InteractableType = EType.DOOR;
+            doorInteract.InteractableName = GetBuildingName();
+        }
+
     }
 
     private void CreateFront()
@@ -255,6 +281,20 @@ public class ModuleAutoBuildingExterior : Module
         go.transform.SetParent(this.transform);
         go.transform.localPosition = new Vector3(0, 0, 0);
         return go.transform;
+    }
+
+    private Transform GetParent(string name)
+    {
+        Transform parent = this.transform.Find(name);
+        return parent;
+    }
+
+    private string GetBuildingName()
+    {
+        if (!string.IsNullOrEmpty(BuildingName))
+            return BuildingName;
+        else
+            return $"Building N#{(int)this.transform.position.x}{(int)this.transform.position.y}{Width}{Height}";
     }
 
 }

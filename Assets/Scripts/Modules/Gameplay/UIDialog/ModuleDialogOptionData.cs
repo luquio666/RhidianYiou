@@ -6,7 +6,8 @@ public enum DialogOptions
 {
     CLOSE_DIALOG,
     SHOW_TARGET_DIALOG,
-    GIVE_ITEM
+    GIVE_ITEM,
+    ENTER_BUILDING
 }
 
 public class ModuleDialogOptionData : MonoBehaviour
