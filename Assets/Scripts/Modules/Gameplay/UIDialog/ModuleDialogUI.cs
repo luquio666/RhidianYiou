@@ -112,7 +112,9 @@ public class ModuleDialogUI : Module
                     yield return null;
                 linesCount = 0;
 
-                //DialogBox.text = string.Empty;
+                // Clean dialog box when text needs to restart, or if it ended
+                if(i < allTextLines.Count - 1)
+                    DialogBox.text = string.Empty;
             }
         }
         if (_dialogData.Options != null && _dialogData.Options.Length > 0)
