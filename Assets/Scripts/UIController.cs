@@ -7,6 +7,7 @@ public class UIController : Singleton<UIController>
 
     public ModuleDialogUI DialogBox;
     public ModuleInventoryUI InventoryUI;
+    public ModuleGameplayUI GameplayUI;
     [Space]
     public List<ModuleDialogData> DialogData;
 
@@ -45,6 +46,7 @@ public class UIController : Singleton<UIController>
     {
         DialogBox.gameObject.SetActive(false);
         InventoryUI.gameObject.SetActive(false);
+        GameplayUI.gameObject.SetActive(true);
     }
 
     private void ShowDialog(string id)

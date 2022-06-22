@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -5472,15 +5472,15 @@ TextureImporter:
       pokemon_221: 1658380240
       pokemon_248: -32078073
       pokemon_73: -1324241539
-      pokemon_164: 1348412196
       pokemon_171: 979831943
+      pokemon_241: -1487823989
       pokemon_116: -2071175488
+      pokemon_164: 1348412196
       pokemon_127: -1244861614
       pokemon_187: 1815420514
       pokemon_130: -1431954057
       pokemon_170: 309673412
       pokemon_107: 1923886103
-      pokemon_241: -1487823989
       pokemon_33: -1146080888
       pokemon_1: -296989399
       pokemon_0: 1438945682
@@ -5604,15 +5604,15 @@ TextureImporter:
       pokemon_189: 805507767
       pokemon_87: 459822713
       pokemon_12: 1562939890
-      pokemon_14: 626988834
       pokemon_38: -1844204453
-      pokemon_31: -1412810975
+      pokemon_251: -959127837
+      pokemon_14: 626988834
       pokemon_10: -1050577788
       pokemon_42: 851537303
       pokemon_228: -1360350004
+      pokemon_31: -1412810975
       pokemon_49: -195307
       pokemon_46: -197374017
-      pokemon_251: -959127837
       pokemon_206: 1335882791
       pokemon_199: -1547489511
       pokemon_207: 198764568
