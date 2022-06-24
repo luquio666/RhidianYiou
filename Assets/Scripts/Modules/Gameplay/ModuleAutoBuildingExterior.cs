@@ -184,8 +184,15 @@ public class ModuleAutoBuildingExterior : Module
         } 
     }
 
+    // Will create front and roofs, which are made of 9 slices each
     private void CreateStructure(string name, Sprite[] buildingSprites, Transform parent, int width, int height, int offsetY)
     {
+        int spriteJump = 0;
+        if (buildingSprites.Length > 9)
+        {
+            // structures with more than 9 slices (like 18 slices) will randomly select any of available
+            spriteJump = Random.Range(0, buildingSprites.Length / 9) * 9;
+        }
         for (int w = 0; w < width; w++)
         {
             for (int h = 0; h < height; h++)
@@ -204,58 +211,59 @@ public class ModuleAutoBuildingExterior : Module
                 if (h == height - 1)
                 { top = true; }
 
-                var buildingSprite = GetSprite(buildingSprites, left, right, bottom, top);
+                var buildingSprite = GetSprite(buildingSprites, left, right, bottom, top, spriteJump);
                 CreateSpriteRenderer(buildingSprite, parent, name, w, h + offsetY);
             }
         }
     }
 
-    private Sprite GetSprite(Sprite[] buildingSprites, bool left, bool right, bool bottom, bool top)
+    // Based on the position, specific sprite will be returner. When usins sprite jump, will jump to the next spritesheed (9 would be a value to make the jump)
+    private Sprite GetSprite(Sprite[] buildingSprites, bool left, bool right, bool bottom, bool top, int spriteJump = 0)
     {
         // top left (0)
         if (top && left)
         {
-            return buildingSprites[0];
+            return buildingSprites[0 + spriteJump];
         }
         // top right (2)
         else if (top && right)
         {
-            return buildingSprites[2];
+            return buildingSprites[2 + spriteJump];
         }
         // bottom left (6)
         else if (bottom && left)
         {
-            return buildingSprites[6];
+            return buildingSprites[6 + spriteJump];
         }
         // bottom right (8)
         else if (bottom && right)
         {
-            return buildingSprites[8];
+            return buildingSprites[8 + spriteJump];
         }
         // bottom (7)
         else if (bottom)
         {
-            return buildingSprites[7];
+            return buildingSprites[7 + spriteJump];
         }
         // top (1)
         else if (top)
         {
-            return buildingSprites[1];
+            return buildingSprites[1 + spriteJump];
         }
         // left (3)
         else if (left)
         {
-            return buildingSprites[3];
+            return buildingSprites[3 + spriteJump];
         }
         // right (5)
         else if (right)
         {
-            return buildingSprites[5];
+            return buildingSprites[5 + spriteJump];
         }
         // middle (4)
         else
         {
-            return buildingSprites[4];
+            return buildingSprites[4 + spriteJump];
         }
     }
 
