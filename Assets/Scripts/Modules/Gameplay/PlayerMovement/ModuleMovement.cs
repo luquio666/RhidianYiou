@@ -88,7 +88,7 @@ public class ModuleMovement : Module
         if (_animIndex < 4)
             return;
         
-        if (CanMoveInDirection(dir) && applyMovement)
+        if (CanMoveInDirection(dir, true) && applyMovement)
         {
             _animIndex = 0;
             _targetMovement = dir;
@@ -124,6 +124,10 @@ public class ModuleMovement : Module
             this.transform.position += _targetMovement / 4;
             Sr.sprite = GetSequenceByTarget(_targetMovement)[_animIndex];
             _animIndex++;
+            if (_animIndex == 4)
+            {
+                _savedSlot.SetActive(false);
+            }
         }
     }
 
@@ -141,9 +145,21 @@ public class ModuleMovement : Module
         return result.ToArray();
     }
 
-    public bool CanMoveInDirection(Vector3 direction)
+    GameObject _savedSlot;
+
+    public bool CanMoveInDirection(Vector3 direction, bool saveSlot = false)
     {
         bool result = Physics.Linecast(transform.position, transform.position + direction) == false;
+        if (result == true && saveSlot)
+        {
+            if (_savedSlot == null)
+            {
+                _savedSlot = new GameObject(this.gameObject.name + "(savedSlot)");
+                _savedSlot.AddComponent<BoxCollider>();
+            }
+            _savedSlot.SetActive(true);
+            _savedSlot.transform.position = this.transform.position + direction;
+        }
         return result;
     }
 

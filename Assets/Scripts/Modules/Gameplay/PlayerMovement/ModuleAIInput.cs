@@ -20,7 +20,7 @@ public class ModuleAIInput : Module
     {
         if (MoveMod == null)
             MoveMod = this.GetComponent<ModuleMovement>();
-        _moveTime = MoveMod.MoveStepTimer * 4;
+        _moveTime = MoveMod.MoveStepTimer * 4 * Random.Range(0.001f, 0.1f);
         if (Behaviour == AIBehaviour.NONE)
             _moveTime *= 10;
     }

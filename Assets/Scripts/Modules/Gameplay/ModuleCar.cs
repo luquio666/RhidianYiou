@@ -5,6 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ModuleCar : MonoBehaviour
 {
+    public bool EnableSetSprite = true;
     public SpriteRenderer Car;
     public BoxCollider CarCollider;
     public Sprite Up, Down, Left, Right;
@@ -22,29 +23,27 @@ public class ModuleCar : MonoBehaviour
 
     private void Update()
     {
-        if (Car == null || CarCollider == null)
+        if (Car == null || CarCollider == null || EnableSetSprite == false)
             return;
 
         if (this.transform.position != _lastPosition)
         {
-            ApplySpriteDirection();
+            SetCarSprite(_lastPosition);
             _lastPosition = this.transform.position;
         }
     }
 
-    private void ApplySpriteDirection()
+    public void SetCarSprite(Vector3 targetPosition)
     {
-        var xmove = this.transform.position.x - _lastPosition.x;
-        var ymove = this.transform.position.y - _lastPosition.y;
-
+        var xmove = this.transform.position.x - targetPosition.x;
+        var ymove = this.transform.position.y - targetPosition.y;
         var xmoveNorm = Mathf.Abs(xmove);
         var ymoveNorm = Mathf.Abs(ymove);
 
-        // horizontal movement
         if (xmoveNorm > ymoveNorm && xmoveNorm > MinMoveThreshold)
         {
-            CarCollider.center = new Vector3(0, -.25f, 0);
-            CarCollider.size = new Vector3(3f, 1.5f, 1f);
+            CarCollider.center = new Vector3(0.1f, -.2f, 0);
+            CarCollider.size = new Vector3(3f, 1.4f, 1f);
 
             if (xmove > 0)
             {
@@ -55,12 +54,11 @@ public class ModuleCar : MonoBehaviour
                 Car.sprite = Left;
             }
         }
-
         // vertical movement
         else if (xmoveNorm < ymoveNorm && ymoveNorm > MinMoveThreshold)
         {
             CarCollider.center = new Vector3(0, 0, 0);
-            CarCollider.size = new Vector3(2f, 3f, 1f);
+            CarCollider.size = new Vector3(1.5f, 3f, 1f);
 
             if (ymove > 0)
             {
@@ -71,9 +69,6 @@ public class ModuleCar : MonoBehaviour
                 Car.sprite = Down;
             }
         }
-        else 
-        {
-            //nothing yet
-        }
+
     }
 }
