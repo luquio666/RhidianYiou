@@ -232,6 +232,10 @@ public class ModuleDialogUI : Module
                 GameEvents.GiveItem(optionData.TargetID);
                 this.gameObject.SetActive(false);
                 break;
+            case global::DialogOptions.BLOCK_GAME:
+                GameEvents.BlockGame();
+                this.gameObject.SetActive(false);
+                break;
             default:
                 break;
         }

@@ -6,7 +6,8 @@ public enum EType
 {
     MSG, // Just a message or descriptions
     PICKABLE, // Something you can pick
-    DOOR // Door that could give you access to places
+    DOOR, // Door that could give you access to places
+    MSG_ID
 }
 
 public class ModuleInteractable : Module
@@ -15,7 +16,7 @@ public class ModuleInteractable : Module
     public EType InteractableType;
 
     [Space]
-
+    public string MessageID;
     public string[] Messages;
     public string[] Pickables;
     public string DoorId;
@@ -85,9 +86,16 @@ public class ModuleInteractable : Module
             default:
                 break;
         }
-        
 
-        GameEvents.ShowDialogData(_dialogData);
+        if (InteractableType == EType.MSG_ID)
+        {
+            this.GetComponent<ModuleAIInput>().Behaviour = AIBehaviour.NONE;
+            GameEvents.StopCurrentMusic();
+            GameEvents.PlayAudio(AudioNames.MUSIC_02);
+            GameEvents.ShowDialog(MessageID);
+        }
+        else
+            GameEvents.ShowDialogData(_dialogData);
     }
 
     private string GetRandomMessage()

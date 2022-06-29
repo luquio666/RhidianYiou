@@ -2,12 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+[CustomEditor(typeof(ModuleDialogOptionData))]
+public class ModuleDialogOptionDataEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        ModuleDialogOptionData myScript = (ModuleDialogOptionData)target;
+        if (GUILayout.Button("SetName"))
+        {
+            myScript.SetName();
+        }
+    }
+}
+#endif
+
 public enum DialogOptions
 {
     CLOSE_DIALOG,
     SHOW_TARGET_DIALOG,
     GIVE_ITEM,
-    ENTER_BUILDING
+    ENTER_BUILDING,
+    BLOCK_GAME
 }
 
 public class ModuleDialogOptionData : MonoBehaviour

@@ -2,6 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+[CustomEditor(typeof(ModuleMovement))]
+public class ModuleMovementEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        ModuleMovement myScript = (ModuleMovement)target;
+        if (GUILayout.Button("UPDATE SPRITE RENDERER"))
+        {
+            myScript.UpdateSpriteRenderer();
+        }
+    }
+}
+#endif
+
 public class ModuleMovement : Module
 {
     public SpriteRenderer Sr;
@@ -100,6 +118,11 @@ public class ModuleMovement : Module
             Sr.sprite = directionSprites[^1];
             _lastDirection = dir;
         }
+    }
+
+    public void UpdateSpriteRenderer()
+    {
+        Sr.sprite = AnimSprites[1];
     }
 
     private void Update()

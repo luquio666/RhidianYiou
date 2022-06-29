@@ -226,7 +226,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 17
-        width: 48
+        width: 16
         height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -268,7 +268,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 1
-        width: 44
+        width: 14
         height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -292,7 +292,7 @@ TextureImporter:
         width: 9
         height: 27
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -300,6 +300,90 @@ TextureImporter:
       bones: []
       spriteID: 1efe6a4a807c96f429c834947c9e9af0
       internalID: 761923920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildingDeco_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 17
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd83c76f38e27a148b6cd8cb971f4322
+      internalID: -114243343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildingDeco_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 17
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6abd99efb4ff7bc4194a828f33e5ff41
+      internalID: 309535235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildingDeco_11
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 1
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 532ac57506280f64b8bf22c3efa9cd34
+      internalID: -643706656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildingDeco_12
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 1
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efd0db1c63ca54b4ea943ea22cb00810
+      internalID: -1214159132
       vertices: []
       indices: 
       edges: []
@@ -316,13 +400,17 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       buildingDeco_3: -1541088583
+      buildingDeco_11: -643706656
+      buildingDeco_10: 309535235
       buildingDeco_4: -1094654190
+      buildingDeco_12: -1214159132
       buildingDeco_5: -506945213
       buildingDeco_8: 761923920
       buildingDeco_7: 1422886732
       buildingDeco_1: 784143432
       buildingDeco_2: 2071385616
       buildingDeco_0: -1385629833
+      buildingDeco_9: -114243343
       buildingDeco_6: 1909985723
   spritePackingTag: 
   pSDRemoveMatte: 0

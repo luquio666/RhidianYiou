@@ -83,6 +83,12 @@ public static class GameEvents
 
 	#region Gameplay events
 
+	public static Action OnBlockGame;
+	public static void BlockGame()
+	{
+		OnBlockGame?.Invoke();
+	}
+
 	public static Action<List<InventoryItem>> OnShowInventory;
 	public static void ShowInventory(List<InventoryItem> inventory)
 	{
@@ -105,6 +111,12 @@ public static class GameEvents
 	public static void PlayAudio(AudioNames audioName)
 	{
 		OnPlayAudio?.Invoke(audioName);
+	}
+
+	public static Action OnStopCurrentMusic;
+	public static void StopCurrentMusic()
+	{
+		OnStopCurrentMusic?.Invoke();
 	}
 
 	public static Action<Vector2> OnPlayerNewPosition;
