@@ -27,6 +27,10 @@ public class ModuleAIInput : Module
 
     private void Update()
     {
+        // lock all IA movements when player is talking
+        if (UIController.Instance.IsUIActive())
+            return;
+
         if (_moveTimeLeft > 0)
         {
             _moveTimeLeft -= Time.deltaTime;
