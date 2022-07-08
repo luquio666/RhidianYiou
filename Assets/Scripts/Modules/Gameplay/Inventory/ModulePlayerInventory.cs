@@ -32,9 +32,9 @@ public class ModulePlayerInventory : Module
         GameEvents.OnGiveItem -= GiveItem;
     }
 
-    private void GiveItem(string itemName)
+    private void GiveItem(string itemName, int itemAmount)
     {
-        AddItem(itemName);
+        AddItem(itemName, itemAmount);
     }
 
     public void ShowInventory()
@@ -42,15 +42,19 @@ public class ModulePlayerInventory : Module
         GameEvents.ShowInventory(Inventory);
     }
 
-    public void AddItem(string itemName)
+    public void AddItem(string itemName, int itemAmount)
     {
+        // Check if the item is already on the inventory
         var itemFound = Inventory.Find(x => x.ItemName == itemName);
         if (itemFound != null)
         {
-            itemFound.ItemAmount++;
+            GameEvents.QuestEvent_PickItem(itemName, itemAmount);
+
+            itemFound.ItemAmount += itemAmount;
         }
         else
         {
+            // Check if we have space to store items
             if (Inventory.Count >= MaxItems)
             {
                 // TODO: quickfix to avoid hide while this trying to be shown...
@@ -58,10 +62,12 @@ public class ModulePlayerInventory : Module
             }
             else
             {
+                GameEvents.QuestEvent_PickItem(itemName, itemAmount);
+
                 InventoryItem newItem = new InventoryItem
                 {
                     ItemName = itemName,
-                    ItemAmount = 1
+                    ItemAmount = itemAmount
                 };
                 Inventory.Add(newItem);
             }

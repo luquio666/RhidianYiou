@@ -32,13 +32,13 @@ public class UIController : Singleton<UIController>
 
     private void Start()
     {
-        bool gameIsBlocked = PlayerPrefs.GetInt("GAME_BLOCKED", 0) == 1;
+        /*bool gameIsBlocked = PlayerPrefs.GetInt("GAME_BLOCKED", 0) == 1;
         if (gameIsBlocked)
         {
             BlockGame();
         }
         // Let only 1 playthrough
-        PlayerPrefs.SetInt("GAME_BLOCKED", 1);
+        PlayerPrefs.SetInt("GAME_BLOCKED", 1);*/
     }
 
     public bool DialogBoxIsActive()
@@ -92,7 +92,7 @@ public class UIController : Singleton<UIController>
     private void BlockGame()
     {
         // ShowBlocked screen
-        PlayerPrefs.SetInt("GAME_BLOCKED", 1);
+        //PlayerPrefs.SetInt("GAME_BLOCKED", 1);
         GameEvents.StopCurrentMusic();
         BlockScreen.SetActive(true);
         Time.timeScale = 0;

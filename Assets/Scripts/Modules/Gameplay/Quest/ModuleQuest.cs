@@ -1,34 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum TaskType
 {
-	FIND,
-	COLLECT,
-	KILL_DESTROY,
-	TAKE_PICTURE,
-	DELIVER,
-	CRAFT
+	FIND_ITEM,
+	TALK_TO_NPC
 }
 
-public enum TaskTarget
-{
-	ITEM,
-	PERSON,
-	LOCATION
-}
-
+[System.Serializable]
 public class Task
 {
+	public string TaskDescription;
 	public TaskType TType;
-	public TaskTarget TTarget;
-
-	public int TargetID;
-	public Vector3 TargetPosition;
+	public string TargetID;
+	public int TargetAmount = 1;
+	[Space]
+	public int TargetAmountProgress;
+	public bool TaskCompleted
+	{
+		get { return TargetAmountProgress >= TargetAmount; }
+	}
 }
 
 public class ModuleQuest : Module
 {
+	// Name of the whole quest
+	public string QuestName;
+	// Tasks to complete quest
 	public Task[] QuestTasks;
+	// Reward after completing all
+	public string QuestReward;
+
+	public Task GetFirstTaskNotCompleted()
+	{
+		return QuestTasks.FirstOrDefault(x => x.TaskCompleted == false);
+	}
+	public void ClearProgress()
+	{
+        foreach (var item in QuestTasks)
+        {
+			item.TargetAmountProgress = 0;
+        }
+	}
+
 }

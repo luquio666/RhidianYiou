@@ -62,6 +62,11 @@ public class ModulePlayerInput : Module
 
     private void OtherInputs()
     {
+        if (Input.GetKeyDown(KeyCode.RightShift))
+        {
+            GameEvents.PlayAudio(AudioNames.CLICK_01);
+            GameEvents.SwapTopInfo();
+        }
         if (Input.GetKeyDown(KeyCode.K))
         {
             GameEvents.PlayAudio(AudioNames.CLICK_01);

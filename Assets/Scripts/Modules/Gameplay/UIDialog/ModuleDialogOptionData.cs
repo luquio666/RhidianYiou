@@ -34,6 +34,7 @@ public class ModuleDialogOptionData : MonoBehaviour
     public string OptionText; // what will be displayed
     public DialogOptions OptionType; // how will react when option selected
     public string TargetID; // dialog ID or item ID
+    public int ItemAmount = 1; // for everything like items
 
     [ContextMenu("SetName")]
     public void SetName()

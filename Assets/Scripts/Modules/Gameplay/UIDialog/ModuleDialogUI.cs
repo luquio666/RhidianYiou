@@ -229,7 +229,7 @@ public class ModuleDialogUI : Module
                 GameEvents.ShowDialog(optionData.TargetID);
                 break;
             case global::DialogOptions.GIVE_ITEM:
-                GameEvents.GiveItem(optionData.TargetID);
+                GameEvents.GiveItem(optionData.TargetID, optionData.ItemAmount);
                 this.gameObject.SetActive(false);
                 break;
             case global::DialogOptions.BLOCK_GAME:

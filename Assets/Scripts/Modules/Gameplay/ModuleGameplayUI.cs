@@ -7,8 +7,12 @@ using UnityEngine.UI;
 
 public class ModuleGameplayUI : Module
 {
+    public GameObject NormalInfoParent;
+    public GameObject QuestInfoParent;
+    [Space]
     public Text RealTime;
     public Text PlayerPos;
+    public Text QuestInfo;
     [Space]
     public List<Text> SelectedDescription;
     public GameObject MoreOptionsHighlight;
@@ -21,12 +25,16 @@ public class ModuleGameplayUI : Module
     {
         GameEvents.OnPlayerActionSelected += PlayerActionSelected;
         GameEvents.OnPlayerNewPosition += PlayerNewPosition;
+        GameEvents.OnSwapTopInfo += SwapTopInfo;
+        GameEvents.OnSetQuestInfo += SetQuestInfo;
     }
 
     private void OnDisable()
     {
         GameEvents.OnPlayerActionSelected -= PlayerActionSelected;
         GameEvents.OnPlayerNewPosition -= PlayerNewPosition;
+        GameEvents.OnSwapTopInfo -= SwapTopInfo;
+        GameEvents.OnSetQuestInfo -= SetQuestInfo;
     }
 
     private void Update()
@@ -35,9 +43,24 @@ public class ModuleGameplayUI : Module
         RealTime.text = $"{currentTime.Hour:00}:{currentTime.Minute:00}";
     }
 
+    private void SetQuestInfo(string info)
+    {
+        QuestInfo.text = info;
+        QuestInfoParent.SetActive(true);
+        NormalInfoParent.SetActive(false);
+    }
+
+    private void SwapTopInfo()
+    {
+        bool questInfoActive = QuestInfoParent.activeInHierarchy;
+
+        QuestInfoParent.SetActive(!questInfoActive);
+        NormalInfoParent.SetActive(questInfoActive);
+    }
+
     private void PlayerNewPosition(Vector2 pos)
     {
-        PlayerPos.text = $"x:{pos.x}\ny:{pos.y}";
+        PlayerPos.text = $"n:{pos.y}\nw:{pos.x}";
     }
 
     private void PlayerActionSelected(PlayerAction pa)

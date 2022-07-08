@@ -17,7 +17,29 @@ public static class GameEvents
 	{
 		OnSaveName?.Invoke(s);
 	}
+	#region Quests
 
+	public static Action<string> OnSetQuestInfo;
+	public static void SetQuestInfo(string questDescription)
+	{
+		OnSetQuestInfo?.Invoke(questDescription);
+	}
+
+	public static Action<string, int> OnQuestEvent_PickItem;
+	public static void QuestEvent_PickItem(string itemName, int itemAmount)
+	{
+		OnQuestEvent_PickItem?.Invoke(itemName, itemAmount);
+	}
+
+	public static Action<string> OnQuestEvent_TalkToNpc;
+	public static void QuestEvent_TalkToNpc(string npcName)
+	{
+		OnQuestEvent_TalkToNpc?.Invoke(npcName);
+	}
+
+	#endregion
+
+	#region Messages
 	public static Action<string> OnButtonInputPressed;
 	public static void ButtonInputPressed(string s)
 	{
@@ -36,10 +58,10 @@ public static class GameEvents
 		OnShowDialogData?.Invoke(dialogData);
 	}
 
-	public static Action<string> OnGiveItem;
-	public static void GiveItem(string id)
+	public static Action<string, int> OnGiveItem;
+	public static void GiveItem(string itemName, int itemAmount)
 	{
-		OnGiveItem?.Invoke(id);
+		OnGiveItem?.Invoke(itemName, itemAmount);
 	}
 
 	public static Action OnHideDialog;
@@ -47,10 +69,11 @@ public static class GameEvents
 	{
 		OnHideDialog?.Invoke();
 	}
+    #endregion
 
-	#region MainMenu events
+    #region MainMenu events
 
-	public static Action OnLoadGameplay;
+    public static Action OnLoadGameplay;
 	public static void LoadGameplay()
 	{
 		OnLoadGameplay?.Invoke();
@@ -107,6 +130,15 @@ public static class GameEvents
 		OnPlayerActionSelected?.Invoke(pa);
 	}
 
+	public static Action OnSwapTopInfo;
+	public static void SwapTopInfo()
+	{
+		OnSwapTopInfo?.Invoke();
+	}
+
+	#endregion
+
+	#region Audio
 	public static Action<AudioNames> OnPlayAudio;
 	public static void PlayAudio(AudioNames audioName)
 	{
@@ -124,6 +156,5 @@ public static class GameEvents
 	{
 		OnPlayerNewPosition?.Invoke(pos);
 	}
-
-	#endregion
+    #endregion
 }

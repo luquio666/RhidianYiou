@@ -12,7 +12,7 @@ public enum EType
 
 public class ModuleInteractable : Module
 {
-    public string InteractableName = "Unknown";
+    public string InteractableName = "";
     public EType InteractableType;
 
     [Space]
@@ -100,11 +100,23 @@ public class ModuleInteractable : Module
 
     private string GetRandomMessage()
     {
-        string value = $"nothing";
+        string value = string.Empty;
+
         if (Messages != null && Messages.Length >= 1)
         {
             int randomIndex = UnityEngine.Random.Range(0, Messages.Length);
-            value = Messages[randomIndex];
+
+            // npcs 
+            if (InteractableName != string.Empty)
+            {
+                GameEvents.QuestEvent_TalkToNpc(InteractableName);
+                value = $"{InteractableName}: ";
+            }
+            value += Messages[randomIndex];
+        }
+        else 
+        {
+            value = $"its just {InteractableName}";
         }
         return value;
     }
