@@ -5,8 +5,9 @@ using UnityEngine;
 
 public enum TaskType
 {
-	FIND_ITEM,
-	TALK_TO_NPC
+	PICK_ITEM,
+	TALK_TO,
+	GO_TO_POSITION
 }
 
 [System.Serializable]
@@ -16,6 +17,8 @@ public class Task
 	public TaskType TType;
 	public string TargetID;
 	public int TargetAmount = 1;
+	public Vector2 TargetPosition;
+	public float TargetArea = 1;
 	[Space]
 	public int TargetAmountProgress;
 	public bool TaskCompleted

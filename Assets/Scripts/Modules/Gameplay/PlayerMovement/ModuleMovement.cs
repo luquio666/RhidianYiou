@@ -125,12 +125,6 @@ public class ModuleMovement : Module
         Sr.sprite = AnimSprites[1];
     }
 
-    private void Update()
-    {
-        if(this.name == "Player")
-            GameEvents.PlayerNewPosition(new Vector2((int)this.transform.position.x, (int)this.transform.position.y));
-    }
-
     private void FixedUpdate()
     {
         if (_animIndex >= 4)
@@ -149,6 +143,8 @@ public class ModuleMovement : Module
             _animIndex++;
             if (_animIndex == 4)
             {
+                if (this.name == "Player")
+                    GameEvents.QuestEvent_ReackPosition(new Vector2(this.transform.position.x, this.transform.position.y));
                 _savedSlot.SetActive(false);
             }
         }

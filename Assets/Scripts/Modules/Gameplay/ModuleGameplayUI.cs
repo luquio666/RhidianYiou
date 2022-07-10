@@ -24,7 +24,7 @@ public class ModuleGameplayUI : Module
     private void OnEnable()
     {
         GameEvents.OnPlayerActionSelected += PlayerActionSelected;
-        GameEvents.OnPlayerNewPosition += PlayerNewPosition;
+        GameEvents.OnQuestEvent_ReackPosition += PlayerNewPosition;
         GameEvents.OnSwapTopInfo += SwapTopInfo;
         GameEvents.OnSetQuestInfo += SetQuestInfo;
     }
@@ -32,7 +32,7 @@ public class ModuleGameplayUI : Module
     private void OnDisable()
     {
         GameEvents.OnPlayerActionSelected -= PlayerActionSelected;
-        GameEvents.OnPlayerNewPosition -= PlayerNewPosition;
+        GameEvents.OnQuestEvent_ReackPosition -= PlayerNewPosition;
         GameEvents.OnSwapTopInfo -= SwapTopInfo;
         GameEvents.OnSetQuestInfo -= SetQuestInfo;
     }

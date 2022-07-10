@@ -151,10 +151,10 @@ public static class GameEvents
 		OnStopCurrentMusic?.Invoke();
 	}
 
-	public static Action<Vector2> OnPlayerNewPosition;
-	public static void PlayerNewPosition(Vector2 pos)
+	public static Action<Vector2> OnQuestEvent_ReackPosition;
+	public static void QuestEvent_ReackPosition(Vector2 pos)
 	{
-		OnPlayerNewPosition?.Invoke(pos);
+		OnQuestEvent_ReackPosition?.Invoke(pos);
 	}
     #endregion
 }

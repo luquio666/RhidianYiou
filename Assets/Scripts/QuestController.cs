@@ -16,6 +16,10 @@ public class QuestControllerEditor : Editor
         {
             myScript.StartActiveQuest();
         }
+        if (GUILayout.Button("RestartActiveQuest"))
+        {
+            myScript.RestartActiveQuest();
+        }
     }
 }
 #endif
@@ -40,6 +44,20 @@ public class QuestController : Singleton<QuestController>
         GameEvents.SetQuestInfo(questDescription);
     }
 
+    public void RestartActiveQuest()
+    {
+        string questDescription = "no quests active";
+
+        if (ActiveQuest != null)
+        {
+            ActiveQuest.ClearProgress();
+            // TODO: maybe quest name just should be shown on a quest panel -_O.O_-
+            questDescription = $"{ActiveQuest.QuestName}";
+            Invoke(nameof(ShowQuestTask), 3f);
+        }
+        GameEvents.SetQuestInfo(questDescription);
+    }
+
     private void ShowQuestTask()
     {
         string questDescription = $"{ActiveQuest.GetFirstTaskNotCompleted().TaskDescription}";
@@ -50,12 +68,14 @@ public class QuestController : Singleton<QuestController>
     {
         GameEvents.OnQuestEvent_PickItem += QuestEvent_PickItem;
         GameEvents.OnQuestEvent_TalkToNpc += QuestEvent_TalkToNpc;
+        GameEvents.OnQuestEvent_ReackPosition += QuestEvent_ReackPosition;
     }
 
     private void OnDisable()
     {
         GameEvents.OnQuestEvent_PickItem -= QuestEvent_PickItem;
         GameEvents.OnQuestEvent_TalkToNpc -= QuestEvent_TalkToNpc;
+        GameEvents.OnQuestEvent_ReackPosition -= QuestEvent_ReackPosition;
     }
 
     private void QuestEvent_PickItem(string itemName, int itemAmount)
@@ -64,7 +84,7 @@ public class QuestController : Singleton<QuestController>
 
         _currentTask = ActiveQuest.GetFirstTaskNotCompleted();
 
-        bool matchTaskType = _currentTask.TType == TaskType.FIND_ITEM;
+        bool matchTaskType = _currentTask.TType == TaskType.PICK_ITEM;
         bool matchItemName = _currentTask.TargetID == itemName;
 
         if (matchTaskType && matchItemName)
@@ -81,9 +101,37 @@ public class QuestController : Singleton<QuestController>
 
         _currentTask = ActiveQuest.GetFirstTaskNotCompleted();
 
+        bool matchTaskType = _currentTask.TType == TaskType.TALK_TO;
         bool matchNpcName = _currentTask.TargetID == npcName;
 
-        if (matchNpcName)
+        if (matchTaskType && matchNpcName)
+        {
+            _currentTask.TargetAmountProgress += 1;
+        }
+
+        CheckQuestTasks(_currentTask);
+    }
+
+    private void QuestEvent_ReackPosition(Vector2 pos)
+    {
+        if (ActiveQuest == null) return;
+
+        _currentTask = ActiveQuest.GetFirstTaskNotCompleted();
+
+        var posX = Mathf.Abs(pos.x);
+        var posY = Mathf.Abs(pos.y);
+
+        var tPosX = Mathf.Abs(_currentTask.TargetPosition.x);
+        var tPosY = Mathf.Abs(_currentTask.TargetPosition.y);
+        
+        bool matchTaskType = _currentTask.TType == TaskType.GO_TO_POSITION;
+        bool matchArea = 
+            (
+            Mathf.Abs(posX - tPosX) <= _currentTask.TargetArea
+            && Mathf.Abs(posY - tPosY) <= _currentTask.TargetArea
+            );
+
+        if (matchTaskType && matchArea)
         {
             _currentTask.TargetAmountProgress += 1;
         }
